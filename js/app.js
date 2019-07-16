@@ -32,7 +32,7 @@
 
     //Cast to string just in case, to ensure consistent behavior.
     button = String(button);
-    curr = calcInput.value;
+    curr = calcInput.value.replace(',', ''); //Remove commas.
     let child;
     switch (button) {
       case '0':
