@@ -52,19 +52,20 @@
 }
 
 .calc-button {
+  border-radius: 5px;
   background-color: rgba(0, 0, 0, 0);
   font-family: 'Nova Mono', monospace;
   font-size: 4vw;
   font-weight: bold;
   margin: .2vw;
   padding: 1.5vw 2.5vw;
-  transition-duration: 3s;
+  transition-duration: 2s;
 }
 .calc-button:hover {
   box-shadow: 0 0 2vw #86fb58;
   color: #86fb58;
   text-shadow: 0 0 2vw #86fb58;
-  transition-duration: .5s;
+  transition-duration: .33s;
 }
 .calc-button:focus, #calc-input:focus {
   outline: 0 !important;
