@@ -83,7 +83,7 @@
       case '-':
       case '*':
       case '/':
-      case '**':
+      case '^':
       case '%':
       switch (prevOp) {
         case '+':
