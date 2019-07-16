@@ -22,7 +22,7 @@
 
 #calc-numbers {
   display: inline-block;
-  width: 66%;
+  width: 65%;
   height: 100%;
   margin: 0 auto;
 }
@@ -39,7 +39,7 @@
 
 #calc-operations {
   display: inline-block;
-  width: 23%;
+  width: 22%;
   height: 100%;
   text-align: center;
 }
