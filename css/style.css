@@ -7,7 +7,17 @@
 #js-calc, .calc-button, #calc-input, #calc-history, #calc-numbers, #calc-operations {
   border: none;
   color: #6b9959;
-  background-color: #343434;
+  background-color: #444242;
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: #86fb58;
+  background: #7e7e7e;
+}
+
+::selection {
+  color: #86fb58;
+  background: #7e7e7e;
 }
 
 #calc-numbers {
@@ -42,15 +52,19 @@
 }
 
 .calc-button {
+  background-color: rgba(0, 0, 0, 0);
   font-family: 'Nova Mono', monospace;
   font-size: 4vw;
   font-weight: bold;
-  margin: .1vw;
+  margin: .2vw;
   padding: 1.5vw 2.5vw;
   transition-duration: .5s;
 }
 .calc-button:hover {
-  box-shadow: 0 0 .5vw #86fb58;
+  box-shadow: 0 0 2vw #86fb58;
   color: #86fb58;
-  text-shadow: 0 0 .5vw #86fb58;
+  text-shadow: 0 0 2vw #86fb58;
+}
+.calc-button:focus, #calc-input:focus {
+  outline: 0 !important;
 }
