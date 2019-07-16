@@ -1,6 +1,5 @@
-'use strict';
-
 (() => {
+  'use strict';
 
   let prev = '0';
   let prevOp = '+';
@@ -9,9 +8,6 @@
   let isDec = false;
 
   let calcElement = document.getElementById('js-calc');
-
-  let clearfix = document.createElement('div');
-  clearfix.class = 'clearfix';
 
   let calcHistory = document.createElement('ul');
   calcHistory.id = 'calc-history';
@@ -164,7 +160,7 @@
         break;
         case '%':
         child = document.createElement('li');
-       child.classList.add('calc-history');
+        child.classList.add('calc-history');
         child.innerHTML = `${prev} % ${curr} = ${curr = String(Number(prev) % Number(curr))}`;
         calcHistory.appendChild(child);
         break;
@@ -176,6 +172,24 @@
       didOp = true;
       prevOp = '+';
       prev = '0';
+      break;
+      case 'ce': //Clear everything
+      prevOp = '+';
+      prev = '0';
+      isDec = false;
+      didOp = true;
+      curr = '0';
+      break;
+      case 'c': //Clear
+      isDec = false;
+      didOp = true;
+      curr = '0';
+      break;
+      case '←':
+      if (curr.charAt(curr.length - 1) === '.') {
+        isDec = false;
+      }
+      curr = curr.substring(0, curr.length - 1);
       break;
     }
     calcInput.value = curr;
@@ -217,7 +231,7 @@
   let button = document.createElement('button');
   button.classList.add('calc-button');
   button.classList.add('calc-num');
-  button.id = 'calc-op-minus\'';
+  button.id = 'calc-op-minus';
   button.onclick = () => doButton('--');
   button.innerHTML = '-';
   calcNumbers.appendChild(button);
@@ -233,7 +247,7 @@
   button = document.createElement('button');
   button.classList.add('calc-button');
   button.classList.add('calc-num');
-  button.id = 'calc-op-decimal\'';
+  button.id = 'calc-op-decimal';
   button.onclick = () => doButton('.');
   button.innerHTML = '.';
   calcNumbers.appendChild(button);
@@ -243,7 +257,7 @@
   button = document.createElement('button');
   button.classList.add('calc-button');
   button.classList.add('calc-op');
-  button.id = 'calc-op-add\'';
+  button.id = 'calc-op-add';
   button.onclick = () => doButton('+');
   button.innerHTML = '+';
   calcOperations.appendChild(button);
@@ -251,7 +265,7 @@
   button = document.createElement('button');
   button.classList.add('calc-button');
   button.classList.add('calc-op');
-  button.id = 'calc-op-subract\'';
+  button.id = 'calc-op-subract';
   button.onclick = () => doButton('-');
   button.innerHTML = '-';
   calcOperations.appendChild(button);
@@ -259,7 +273,7 @@
   button = document.createElement('button');
   button.classList.add('calc-button');
   button.classList.add('calc-op');
-  button.id = 'calc-op-modulus\'';
+  button.id = 'calc-op-modulus';
   button.onclick = () => doButton('%');
   button.innerHTML = '%';
   calcOperations.appendChild(button);
@@ -269,7 +283,7 @@
   button = document.createElement('button');
   button.classList.add('calc-button');
   button.classList.add('calc-op');
-  button.id = 'calc-op-multiply\'';
+  button.id = 'calc-op-multiply';
   button.onclick = () => doButton('*');
   button.innerHTML = '*';
   calcOperations.appendChild(button);
@@ -277,7 +291,7 @@
   button = document.createElement('button');
   button.classList.add('calc-button');
   button.classList.add('calc-op');
-  button.id = 'calc-op-divide\'';
+  button.id = 'calc-op-divide';
   button.onclick = () => doButton('/');
   button.innerHTML = '/';
   calcOperations.appendChild(button);
@@ -285,7 +299,7 @@
   button = document.createElement('button');
   button.classList.add('calc-button');
   button.classList.add('calc-op');
-  button.id = 'calc-op-power\'';
+  button.id = 'calc-op-power';
   button.onclick = () => doButton('^');
   button.innerHTML = '^';
   calcOperations.appendChild(button);
@@ -295,7 +309,33 @@
   button = document.createElement('button');
   button.classList.add('calc-button');
   button.classList.add('calc-op');
-  button.id = 'calc-op-equals\'';
+  button.id = 'calc-op-clear';
+  button.onclick = () => doButton('←');
+  button.innerHTML = '←';
+  calcOperations.appendChild(button);
+
+  button = document.createElement('button');
+  button.classList.add('calc-button');
+  button.classList.add('calc-op');
+  button.id = 'calc-op-clear';
+  button.onclick = () => doButton('c');
+  button.innerHTML = 'C';
+  calcOperations.appendChild(button);
+
+  button = document.createElement('button');
+  button.classList.add('calc-button');
+  button.classList.add('calc-op');
+  button.id = 'calc-op-clear';
+  button.onclick = () => doButton('ce');
+  button.innerHTML = 'CE';
+  calcOperations.appendChild(button);
+
+  calcOperations.append(document.createElement('br'));
+
+  button = document.createElement('button');
+  button.classList.add('calc-button');
+  button.classList.add('calc-op');
+  button.id = 'calc-op-equals';
   button.onclick = () => doButton('=');
   button.innerHTML = '=';
   calcOperations.appendChild(button);
