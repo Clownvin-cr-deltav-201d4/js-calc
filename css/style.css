@@ -58,12 +58,13 @@
   font-weight: bold;
   margin: .2vw;
   padding: 1.5vw 2.5vw;
-  transition-duration: .5s;
+  transition-duration: 3s;
 }
 .calc-button:hover {
   box-shadow: 0 0 2vw #86fb58;
   color: #86fb58;
   text-shadow: 0 0 2vw #86fb58;
+  transition-duration: .5s;
 }
 .calc-button:focus, #calc-input:focus {
   outline: 0 !important;
