@@ -15,6 +15,7 @@
   let calcInput = document.createElement('input');
   calcInput.type = 'text';
   calcInput.id = 'calc-input';
+  calcInput.value = '0';
 
   let calcNumbers = document.createElement('section');
   calcNumbers.id = 'calc-numbers';
