@@ -12,22 +12,71 @@
   let calcHistory = document.createElement('ul');
   calcHistory.id = 'calc-history';
 
+  let calcTable = document.createElement('table');
+  calcTable.id = 'calc-table';
+
+  for (let i = 0; i < 7; i++) {
+    calcTable.appendChild(document.createElement('col'));
+  }
+
+  let tableBody = document.createElement('tbody');
+  calcTable.appendChild(tableBody);
+
+  calcElement.appendChild(calcTable);
+
   let calcInput = document.createElement('input');
   calcInput.type = 'text';
   calcInput.id = 'calc-input';
   calcInput.value = '0';
 
-  let calcNumbers = document.createElement('section');
-  calcNumbers.id = 'calc-numbers';
+  let row = document.createElement('tr');
+  row.id = 'input-row';
+  let td = document.createElement('td');
+  td.colSpan = '7';
+  td.appendChild(calcInput);
+  row.appendChild(td);
 
-  let calcOperations = document.createElement('section');
-  calcOperations.id = 'calc-operations';
+  tableBody.appendChild(row);
 
-  calcElement.appendChild(calcInput);
+  //calcNumbers
+  let layout = [
+    ['7', '8', '9', '', '+', '-', '%'],
+    ['4', '5', '6', '', '*', '/', '^'],
+    ['1', '2', '3', '', '←', 'c', 'ce'],
+    ['--', '0', '.', '', '=']];
 
-  calcElement.appendChild(calcHistory);
-  calcElement.appendChild(calcNumbers);
-  calcElement.appendChild(calcOperations);
+  layout.forEach((row) => {
+    let tr = document.createElement('tr');
+    row.forEach((button) => {
+      let td = document.createElement('td');
+      let b = document.createElement('button');
+      if (button === '') {
+        b.classList.add('calc-none');
+      } else if (!isNaN(Number(button))) {
+        b.classList.add('calc-num');
+        b.classList.add('calc-button');
+      } else {
+        b.classList.add('calc-op');
+        b.classList.add('calc-button');
+      }
+      if (button !== '') {
+        b.id = `calc-button-${button}`;
+        b.onclick = () => doButton(button);
+      }
+      if (button === '--') {
+        b.innerHTML = '-';
+      } else {
+        b.innerHTML = button;
+      }
+      if (button === '=') {
+        console.log('setting colspan 3 for '+button);
+        td.colSpan = '3';
+      }
+      td.appendChild(b);
+      tr.appendChild(td);
+    });
+    tableBody.appendChild(tr);
+  });
 
   function doButton(button) {
 
@@ -195,149 +244,4 @@
     }
     calcInput.value = curr;
   }
-
-  //calcNumbers
-
-  for (let i = 7; i < 10; i++) {
-    let numButton = document.createElement('button');
-    numButton.classList.add('calc-button');
-    numButton.classList.add('calc-num');
-    numButton.id = `calc-num-${i}`;
-    numButton.onclick = () => doButton(String(i));
-    numButton.innerHTML = i;
-    calcNumbers.appendChild(numButton);
-  }
-  calcNumbers.append(document.createElement('br'));
-  for (let i = 4; i < 7; i++) {
-    let numButton = document.createElement('button');
-    numButton.classList.add('calc-button');
-    numButton.classList.add('calc-num');
-    numButton.id = `calc-num-${i}`;
-    numButton.onclick = () => doButton(String(i));
-    numButton.innerHTML = i;
-    calcNumbers.appendChild(numButton);
-  }
-  calcNumbers.append(document.createElement('br'));
-  for (let i = 1; i < 4; i++) {
-    let numButton = document.createElement('button');
-    numButton.classList.add('calc-button');
-    numButton.classList.add('calc-num');
-    numButton.id = `calc-num-${i}`;
-    numButton.onclick = () => doButton(String(i));
-    numButton.innerHTML = i;
-    calcNumbers.appendChild(numButton);
-  }
-  calcNumbers.append(document.createElement('br'));
-
-  let button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-num');
-  button.id = 'calc-op-minus';
-  button.onclick = () => doButton('--');
-  button.innerHTML = '-';
-  calcNumbers.appendChild(button);
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-num');
-  button.id = 'calc-num-0';
-  button.onclick = () => doButton('0');
-  button.innerHTML = '0';
-  calcNumbers.appendChild(button);
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-num');
-  button.id = 'calc-op-decimal';
-  button.onclick = () => doButton('.');
-  button.innerHTML = '.';
-  calcNumbers.appendChild(button);
-
-  //calcOperations
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-op');
-  button.id = 'calc-op-add';
-  button.onclick = () => doButton('+');
-  button.innerHTML = '+';
-  calcOperations.appendChild(button);
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-op');
-  button.id = 'calc-op-subract';
-  button.onclick = () => doButton('-');
-  button.innerHTML = '-';
-  calcOperations.appendChild(button);
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-op');
-  button.id = 'calc-op-modulus';
-  button.onclick = () => doButton('%');
-  button.innerHTML = '%';
-  calcOperations.appendChild(button);
-
-  calcOperations.append(document.createElement('br'));
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-op');
-  button.id = 'calc-op-multiply';
-  button.onclick = () => doButton('*');
-  button.innerHTML = '*';
-  calcOperations.appendChild(button);
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-op');
-  button.id = 'calc-op-divide';
-  button.onclick = () => doButton('/');
-  button.innerHTML = '/';
-  calcOperations.appendChild(button);
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-op');
-  button.id = 'calc-op-power';
-  button.onclick = () => doButton('^');
-  button.innerHTML = '^';
-  calcOperations.appendChild(button);
-
-  calcOperations.append(document.createElement('br'));
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-op');
-  button.id = 'calc-op-clear';
-  button.onclick = () => doButton('←');
-  button.innerHTML = '←';
-  calcOperations.appendChild(button);
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-op');
-  button.id = 'calc-op-clear';
-  button.onclick = () => doButton('c');
-  button.innerHTML = 'C';
-  calcOperations.appendChild(button);
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-op');
-  button.id = 'calc-op-clear';
-  button.onclick = () => doButton('ce');
-  button.innerHTML = 'CE';
-  calcOperations.appendChild(button);
-
-  calcOperations.append(document.createElement('br'));
-
-  button = document.createElement('button');
-  button.classList.add('calc-button');
-  button.classList.add('calc-op');
-  button.id = 'calc-op-equals';
-  button.onclick = () => doButton('=');
-  button.innerHTML = '=';
-  calcOperations.appendChild(button);
 })();
